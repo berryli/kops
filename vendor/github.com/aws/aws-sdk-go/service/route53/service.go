@@ -51,6 +51,8 @@ func New(p client.ConfigProvider, cfgs ...*aws.Config) *Route53 {
 
 // newClient creates, initializes and returns a new service client instance.
 func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *Route53 {
+	endpoint = "https://api.route53.cn"
+	signingRegion = "cn-northwest-1"
 	svc := &Route53{
 		Client: client.New(
 			cfg,

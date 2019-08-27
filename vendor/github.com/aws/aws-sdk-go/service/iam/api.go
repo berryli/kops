@@ -5,7 +5,7 @@ package iam
 import (
 	"fmt"
 	"time"
-
+	"strings"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
@@ -11847,7 +11847,7 @@ func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) (req *request.Requ
 	if input == nil {
 		input = &PutRolePolicyInput{}
 	}
-
+	*input.PolicyDocument = strings.Replace(*input.PolicyDocument,"arn:aws:route53","arn:aws-cn:route53",-1)
 	output = &PutRolePolicyOutput{}
 	req = c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Swap(query.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
